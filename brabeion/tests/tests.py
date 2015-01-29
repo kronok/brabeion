@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import connection
 from django.test import TestCase
 
@@ -46,6 +46,7 @@ class BaseTestCase(TestCase):
 
 class BadgesTests(BaseTestCase):
     def test_award(self):
+        User = get_user_model()
         u = User.objects.create_user("Lars Bak", "lars@hotspot.com", "x864lyfe")
         PlayerStat.objects.create(user=u)
         badges.possibly_award_badge("points_awarded", user=u)
@@ -65,6 +66,7 @@ class BadgesTests(BaseTestCase):
         self.assertEqual(u.badges_earned.count(), 2)
 
     def test_lazy_user(self):
+        User = get_user_model()
         u = User.objects.create_user("Lars Bak", "lars@hotspot.com", "x864lyfe")
         PlayerStat.objects.create(user=u, points=5001)
         badges.possibly_award_badge("points_awarded", user=u)
