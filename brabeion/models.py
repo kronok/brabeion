@@ -12,6 +12,9 @@ class BadgeAward(models.Model):
     def __getattr__(self, attr):
         return getattr(self._badge, attr)
 
+    class Meta:
+        app_label = 'brabeion'
+
     @property
     def badge(self):
         return self
