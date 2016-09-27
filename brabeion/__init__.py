@@ -1,1 +1,1 @@
-from brabeion.internals import badges  # noqa
+# from brabeion.internals import badges  # noqa
